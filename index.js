@@ -7,16 +7,17 @@ import express from "express";
 import router from "./router.js";
 import session from 'express-session';
 import redis from 'redis';
-import connectRedis from 'connect-redis';
+import { default as connectRedis } from 'connect-redis';
 
 
 // Créer une app
 const app = express();
 
-// Créer un client Redis
+// Connexion à Redis via les variables d'environnement de Railway
 const redisClient = redis.createClient({
-  host: 'localhost', // Host de Redis (ajuste si nécessaire)
-  port: 6379, // Port de Redis (le port par défaut est 6379)
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT || 6379,
+  password: process.env.REDIS_PASSWORD,
 });
 
 // Configurer Redis Store pour les sessions
@@ -24,14 +25,14 @@ const RedisStore = connectRedis(session);
 
 // Utiliser les sessions avec Redis Store
 app.use(session({
-  store: new RedisStore({ client: redisClient }), // Utiliser le client Redis pour le store
-  secret: 'your-secret-key', // Clé secrète pour signer les sessions
-  resave: false, // Ne pas resauvegarder la session si elle n'a pas changé
-  saveUninitialized: false, // Ne pas sauvegarder les sessions non initialisées
+  store: new RedisStore({ client: redisClient }),
+  secret: process.env.SESSION_SECRET || 'your-secret-key',
+  resave: false,
+  saveUninitialized: false,
   cookie: {
-    secure: false, // Définir à `true` si vous utilisez HTTPS (en production)
-    httpOnly: true, // Ne pas rendre le cookie accessible via JavaScript
-    maxAge: 1000 * 60 * 60 * 24, // Durée de vie du cookie (par exemple 1 jour)
+    secure: process.env.NODE_ENV === 'production',
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 24, // Durée de vie du cookie (1 jour)
   },
 }));
 
