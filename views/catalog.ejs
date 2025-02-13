@@ -1,0 +1,91 @@
+<%- include('./partials/header') %>
+
+<main>
+  <div class="banner">
+    <h2 class="catalog-title">~ Notre Catalogue ~</h2>
+  </div>
+
+  <section id="catalog-articles">
+    <div class="catalog-container">
+      <div class="category-input">
+        <form class="categories-form" action="">
+          <fieldset>
+            <legend>Choisissez vos préférences</legend>
+
+            <label for="preferences">Préférences</label>
+            <select id="preferences" name="preferences">
+              <option value="tout" disabled selected>Catégorie</option>
+
+              <!-- Groupe "Caractéristique" -->
+              <optgroup label="Caractéristique">
+                <% const uniqueCategories = [...new Set(coffees.map(coffee =>
+                coffee.category))]; uniqueCategories.forEach(category => { %>
+                <option value="<%= category %>"><%= category %></option>
+                <% }) %>
+              </optgroup>
+
+              <!-- Groupe "Origine" -->
+              <optgroup label="Origine">
+                <% // Créer un tableau avec les pays uniques const
+                uniqueOrigins = [...new Set(coffees.map(coffee =>
+                coffee.origin))]; uniqueOrigins.forEach(origin => { %>
+                <option
+                  value="<%= origin.toLowerCase().replace(/\s+/g, '-') %>"
+                >
+                  <%= origin %>
+                </option>
+                <% }) %>
+              </optgroup>
+            </select>
+          </fieldset>
+        </form>
+      </div>
+      <div class="articlesContainer">
+        
+        <% coffees.forEach((coffee, index) => { %>
+        <article
+          class="article-news <%= coffee.category.toLowerCase() %> <%= coffee.origin.toLowerCase().replace(/ /g, '-') %> <%= index >= 3 ? 'hidden' : '' %>"
+        >
+          <div class="pictureContainer">
+            <img
+              class="article-picture"
+              src="assets/coffees/<%= coffee.reference %>.png"
+              alt="Photo du café <%= coffee.name %>"
+            />
+            <span class="badge <%= coffee.category %>">
+              <%= coffee.category %>
+            </span>
+          </div>
+          <h3 class="coffee-name">
+            <%= coffee.name %>
+            <img
+              class="leaf"
+              src="/assets/coffees/leaf.svg"
+              alt="Une feuille"
+            />
+          </h3>
+          <p><%= coffee.origin %></p>
+          <p class="price">
+            <%= coffee.price_per_kg %>€ /kg <% if (coffee.available) { %>
+            <span class="available">en stock</span>
+            <% } else { %>
+            <span class="non-available">rupture</span>
+            <% } %>
+          </p>
+          <%- include("partials/btn", { link: `/coffee/${coffee.id}`, text:
+          "DÉCOUVRIR" }) %>
+        </article>
+        <% }) %>
+      </div>
+
+      <button id="toggleAllBtn" class="btn">Voir tout</button>
+    </div>
+  </section>
+</main>
+
+<%- include('./partials/footer') %>
+
+<!-- Importer le fichier JavaScript qui contient la logique -->
+<script type="module" src="/js/toggleArticles.js" defer></script>
+<script type="module" src="/js/toggleCategory.js" defer></script>
+<script type="module" src="/js/toggleSideBar.js" defer></script>

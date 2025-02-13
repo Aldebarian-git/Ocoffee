@@ -1,0 +1,64 @@
+<%- include('./partials/header') %>
+
+<main>
+  <div class="contact-banner"></div>
+
+  <div class="contact-container">
+    <h2 class="contact-title">~ Nous Contacter ~</h2>
+
+    <form id="contact-form">
+      <div class="form-group">
+        <label>Nom</label>
+        <input type="text" name="name" placeholder="John Dupond" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="john.dupond@gmail.com"/>
+      </div>
+      <div class="form-group">
+      <label>Message</label>
+        <textarea name="message" placeholder="Écrivez votre message ici"></textarea>
+        <input class="submit-btn" type="submit" value="Envoyer" />
+      </div>
+    </form>
+  </div>
+</main>
+
+<%- include('./partials/footer') %>
+
+<script type="module" src="/js/toggleSideBar.js" defer></script>
+
+<script type="text/javascript">
+  window.onload = function() {
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Empêcher l'envoi immédiat du formulaire
+
+      // Afficher une boîte de dialogue de confirmation
+      const confirmation = window.confirm("Êtes-vous sûr de vouloir envoyer ce message ?");
+      
+      if (confirmation) {
+        // Si l'utilisateur confirme, envoyer le formulaire avec EmailJS
+        emailjs.sendForm('service_ie0evfj', 'template_4c36vhn', this)
+          .then(function(response) {
+            console.log('SUCCESS!', response);
+            alert('Votre message a été envoyé avec succès !');
+            
+            // Réinitialiser les champs du formulaire après l'envoi réussi
+            document.querySelector('input[name="name"]').value = '';
+            document.querySelector('input[name="email"]').value = '';
+            document.querySelector('textarea[name="message"]').value = '';
+          }, function(error) {
+            console.log('FAILED...', error);
+            alert('Erreur lors de l\'envoi du message. Veuillez réessayer.');
+          });
+      } else {
+        // Si l'utilisateur annule, afficher un message d'annulation
+        console.log("Envoi du message annulé.");
+      }
+    });
+  };
+</script>
+
+
+
+

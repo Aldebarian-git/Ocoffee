@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg" />
+  <link rel="stylesheet" href="/css/reset.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <% if (typeof page !== 'undefined' && page === 'admin') { %>
+    <link rel="stylesheet" href="/css/admin.css">
+  <% } %>
+  
+  <% if (typeof page !== 'undefined' && page === 'contact') { %>
+    <script type="text/javascript">
+      (function() {
+        // https://dashboard.emailjs.com/admin/account
+        emailjs.init({
+          publicKey: "OxMtiQwebxqzoWiUi",
+        });
+      })();
+    </script>
+    <script type="text/javascript">
+      window.onload = function() {
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+          event.preventDefault();
+          // these IDs from the previous steps
+          emailjs.sendForm('service_ie0evfj', 'template_4c36vhn', this)
+            .then(() => {
+              console.log('SUCCESS!');
+            }, (error) => {
+              console.log('FAILED...', error);
+            });
+        });
+      }
+    </script>
+  <% } %>
+  
+  
+   <title>O'Coffee - Boutique Bio</title>
+</head>
+
+<body>
+  <header>
+    <div class="logoContainer">
+      <img class="header-logo" src="/assets/logo.svg" alt="O'coffee Logo" />
+      <h1>O'Coffee</h1>
+    </div>
+
+    
+
+    <nav>
+      <ul>
+        <li class="link">
+          <a class="nav-links" href="/"><i class="fa-solid fa-house"></i>Accueil</a>
+        </li>
+        <li class="link">
+          <a class="nav-links" href="/catalog"><i class="fa-solid fa-list"></i>Catalogue</a>
+        </li>
+        <li class="link">
+          <a class="nav-links" href="/shop"><i class="fa-solid fa-shop"></i>La Boutique</a>
+        </li>
+        <li class="link">
+          <a class="nav-links" href="/contact"><i class="fa-solid fa-address-book"></i>Contact</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div id="side-bar">
+    <div class="toggle-btn" id="btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <ul class="burger-links">
+      <li class="link-burger">
+        <a class="nav-links" href="/"><i class="fa-solid fa-house"></i>Accueil</a>
+      </li>
+      <li class="link-burger">
+        <a class="nav-links" href="/catalog"><i class="fa-solid fa-list"></i>Catalogue</a>
+      </li>
+      <li class="link-burger">
+        <a class="nav-links" href="/shop"><i class="fa-solid fa-shop"></i>La Boutique</a>
+      </li>
+      <li class="link-burger">
+        <a class="nav-links" href="/contact"><i class="fa-solid fa-address-book"></i>Contact</a>
+      </li>
+    </ul>
+
+    
+  </div>
+
+  

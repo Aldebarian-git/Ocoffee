@@ -1,0 +1,145 @@
+:root {
+    --primary-color: #f7dbb9;
+    --secondary-color: #3e1e04;
+    --earthy-green: #6b8e23;
+    --bg-color: #ffffff;
+    --bg-color2:#faebda;
+    --font-size-mobile: 14px;
+    --font-size-desktop: 16px;
+    --font-family: "Lato", sans-serif;
+    --font-family-title: "Playfair Display", serif;
+    --font-family-logo: "Dancing Script", cursive;
+  }
+
+#admin{
+    min-height: calc(100vh - 280px);
+    display: flex;
+    flex-direction: column;
+}
+
+.adminContainer{
+    display: flex;
+    justify-content: start;
+    gap: 15px;
+}
+
+h1{
+    text-align: center;
+    font-family: var(--font-family-logo);
+    font-size: clamp(22px, 3vw, 32px);
+    padding: 2rem 0;
+    border-top: 1px solid var(--secondary-color);
+}
+
+.admin-form{
+    width: 100%;
+}
+
+.radio-btn{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center; 
+    gap: 10px;   
+}
+
+#available-no,#available-yes{
+    height: 20px;
+    width: 20px;
+    border: 1px solid var(--secondary-color);
+    margin: 0;
+    padding: 0;
+
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.submit-btn.delete{
+    background: red;
+    
+    
+}
+
+.submit-btn.delete:hover{
+    background: white;
+    color: red;
+    border: 1px solid red;
+}
+
+.noReferenceFindMessage{
+    color: red;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 10px; 
+}
+
+.admin-login{
+    min-height: calc(100vh - 296px);
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.add-coffee, .delete-coffee, .search-coffee{
+    display: flex;
+    flex-direction: column;   
+    align-items: center; 
+    margin: 0 auto;
+}
+
+.admin-form textarea{
+    height: 150px;
+    min-height: 150px;
+}
+
+.logout{
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    width: min-content;
+    white-space: nowrap;
+    z-index: 5000;
+}
+
+#product{
+    height: min-content;
+    min-height: 0;
+}
+
+.btn-admin-container{
+display: flex;
+gap: 5px;
+}
+
+.article-news{
+    height: 400px;
+    width: 100%;
+}
+
+a{
+    text-decoration: none;
+}
+
+
+.form-edit-coffee-container{
+    width: 100%;
+    margin: auto;
+}
+
+.save, .login{
+    white-space: nowrap;
+}
+
+.articlesContainer{
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+

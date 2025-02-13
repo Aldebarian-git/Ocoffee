@@ -1,0 +1,21 @@
+<%- include('./partials/header') %>
+
+<main class="not-found">
+  <section class="error-container">
+    <h2 class="error-title">Holala ! C'est la Cata! Page introuvable</h2>
+    <p class="error-message">
+      Il semble que la page que vous recherchez n'existe pas ou a été déplacée.
+    </p>
+    <div class="error-image">
+      <img
+        src="/assets/coffees/404.jpeg"
+        alt="Illustration d'une tasse de café "
+      />
+    </div>
+    <div class="error-button">
+      <%- include("partials/btn", { link: "/", text: "Suis-nous" }) %>
+    </div>
+  </section>
+</main>
+
+<%- include('./partials/footer') %>

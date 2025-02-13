@@ -1,0 +1,121 @@
+<%- include('./partials/header') %>
+
+<main>
+  <section id="introduction">
+    <div class="introductionContent">
+      <h2 class="introduction-title title">Qui sommes-nous?</h2>
+      <p class="introduction-paragraph">
+        <strong>Jean et Jacques Pepper</strong>, deux frères passionnés par le <strong>café</strong>, sont les fondateurs de notre boutique. Avec une <em>expertise approfondie</em> et un <em>amour profond</em> pour cette <strong>délicieuse boisson</strong>, ils ont créé un espace où le <strong>café</strong> est célébré comme une <strong>expérience raffinée</strong> et inspirante.
+      </p>
+
+            
+      <div class="hidden-content-container">       
+        <div class="hidden-content">
+          
+          <h3>Un voyage initiatique en Colombie</h3>
+          
+          <p class="introduction-paragraph">
+            Pendant leur séjour en <strong>Colombie</strong>, Jean et Jacques ont eu la chance de visiter une <strong>plantation de café</strong> pittoresque, nichée au cœur des <em>montagnes verdoyantes</em>. Ils ont été immédiatement captivés par l'<strong>atmosphère envoûtante</strong> et l'engagement des <strong>agriculteurs locaux</strong> à cultiver les meilleurs <strong>grains de café</strong>.
+          </p>
+
+          <div class="meet">
+
+            <img class="introduction-hidden-picture colombie-img" src="/assets/coffees/colombie.jpg" alt="Photo de planc de tabac en colombie">
+            <div>
+              
+              <h3>À la rencontre des producteurs de café</h3>
+              
+              <p class="introduction-paragraph">
+                Au cours de cette visite, ils ont rencontré des <strong>producteurs de café passionnés</strong> qui leur ont partagé leurs connaissances et leur amour pour le <strong>processus de culture, de récolte et de transformation du café</strong>. Jean et Jacques ont été fascinés par l'<strong>attention méticuleuse</strong> portée à chaque étape de la production, ainsi que par la <strong>diversité des saveurs et des arômes uniques</strong> que les différents <em>terroirs colombiens</em> offraient.
+              </p>
+            </div>
+          </div>
+            
+          
+          
+          <h3>La naissance d'une vision</h3>
+      
+          <p class="introduction-paragraph">
+            C'est à ce moment-là que l'<strong>étincelle de l'inspiration</strong> a embrasé leur esprit. Ils ont réalisé qu'ils voulaient partager leur <strong>passion pour le café de qualité</strong> avec le reste du monde. Leur vision était de créer un lieu où les <strong>amateurs de café</strong> pourraient découvrir et déguster des <strong>variétés de café exceptionnelles</strong>, tout en apprenant sur leur <strong>origine</strong> et leur <strong>processus de production</strong>.
+          </p>
+
+          <img src="/assets/coffees/coffee4.png" alt="Une tasse à café blanche" class="introduction-hidden-picture coffee-cup">
+            
+          <h3>Bien plus qu’un simple commerce</h3>
+      
+          <p class="introduction-paragraph">
+            Leur <strong>boutique de café</strong> est bien plus qu'un simple commerce. C'est un lieu où les clients peuvent vivre une <strong>expérience sensorielle unique</strong>, en explorant les différentes <strong>origines</strong>, <strong>torréfactions</strong> et <strong>méthodes d'infusion</strong>. Jean et Jacques se sont également engagés à <strong>soutenir les communautés de producteurs de café</strong> en travaillant directement avec eux et en veillant à ce que chaque <strong>tasse de café</strong> servie contribue à un <em>commerce équitable et durable</em>.
+          </p>
+      
+          <div class="reference">
+            <div>
+              <h3>Une référence pour les amateurs de café</h3>              
+              <p class="introduction-paragraph">
+                Aujourd'hui, la <strong>boutique de café</strong> des frères Pepper est devenue une <strong>référence</strong> pour les <strong>amateurs de café</strong> de la région. Leur <strong>passion</strong>, leur <strong>connaissance approfondie</strong> et leur <strong>engagement envers la qualité</strong> se reflètent dans chaque <strong>tasse servie</strong>. Jean et Jacques sont fiers d'avoir transformé leur voyage en <strong>Colombie</strong> en une <strong>aventure entrepreneuriale</strong> qui a permis à tant de personnes de découvrir et d'apprécier le véritable <strong>plaisir du café</strong>.
+              </p>
+            </div>
+            <img class="introduction-hidden-picture shop-picture" src="/assets/about.jpg" alt="Une photo de la boutique">
+            </div>
+        </div>
+          
+        <button class="learn-more btn-more">
+          <span class="circle" aria-hidden="true">
+            <span class="icon arrow"></span>
+          </span>
+          <a href="" class="button-text">En savoir plus</a>
+        </button>
+      </div>
+      
+        
+
+      
+    </div>
+    <div class="introductionPicture">
+      <img
+        class="introduction-picture"
+        src="/assets/coffees/bonheur_1.jpg"
+        alt="A picture with Coffee"
+      />
+    </div>
+
+    <div class="border-top-svg"></div>
+  </section>
+
+  <section id="news">
+    <h2 class="news-title title">~ Nos nouveautés ~</h2>
+    <div class="newsSlider">
+      <button class="last-btn" type="button" aria-label="Précédent">&lt;</button>
+      
+      <div class="newsWrapper">
+        <% coffees.forEach(coffee => { %>
+        <article class="article-news-nouveaute">
+          <div class="pictureContainer">
+            <img class="article-picture"
+              src="assets/coffees/<%= coffee.reference %>.png"
+              alt="Photo du café <%= coffee.name %>"/>
+            <span class="badge nouveaute">Nouveauté</span>
+          </div>
+          <h3 class="coffee-name">
+            <%= coffee.name %>
+            <img class="leaf" src="/assets/coffees/leaf.svg" alt="Une feuille" />
+          </h3>
+          <p class="news-paragraph"><%= coffee.description %></p>
+          <%- include("partials/btn", { link: `/coffee/${coffee.id}`, text: "DÉCOUVRIR" }) %>
+        </article>
+        <% }) %>
+      </div>
+      
+      <button class="next-btn" type="button" aria-label="Suivant">&gt;</button>
+    </div>
+    
+    <%- include("partials/btn", { link: `/catalog`, text: "Catalogue" }) %>
+  </section>
+  
+  
+</main>
+
+<%- include('./partials/footer') %>
+
+<script type="module" src="/js/toggleInfos.js" defer></script>
+<script type="module" src="/js/toggleSideBar.js" defer></script>
+<script type="module" src="/js/slider.js" defer></script>

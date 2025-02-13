@@ -1,0 +1,103 @@
+<%- include('./partials/header') %>
+
+<main>
+  <div class="shop-banner">
+    <h2 class="catalog-title">~ Notre Boutique ~</h2>
+  </div>
+
+  <section class="shop-introduction">
+    <div class="introductionContent">
+      <h2 class="title">Votre boutique Hautdequoise</h2>
+      <p>
+        <strong>Jean et Jacques Pepper</strong>, deux frères passionnés par le café, sont les
+        fondateurs de notre boutique. Avec une expertise approfondie et un
+        amour profond pour cette délicieuse boisson, ils ont créé un espace
+        où le café est célébré comme une <strong>expérience raffinée et inspirante</strong>.
+      </p>
+    </div>
+    <figure class="shop-image">
+      <img src="/assets/coffees/bohneur_3.jpg" alt="Ambiance chaleureuse de la boutique de café" />
+    </figure>
+  </section>
+
+  <section class="shop-info">
+    <figure class="shop-image">
+      <img src="/assets/coffees/bohneur_4.jpeg" alt="Décoration et ambiance de la boutique de café" />
+    </figure>
+    <div class="shop-infoContent">
+      <h2 class="title">Une ambiance unique</h2>
+      <p>
+        <strong>Bienvenue dans notre boutique</strong>, où règne une atmosphère accueillante
+        qui éveille tous vos sens. Dès que vous franchissez la porte, vous êtes enveloppé
+        d'une <strong>douce symphonie d'arômes</strong> envoûtants de café fraîchement moulu.
+      </p>
+    </div>
+  </section>
+
+  <section class="shop-ambiance">
+    <figure class="shop-image">
+      <img src="/assets/coffees/bonheur_2.jpg" alt="Décoration et ambiance de la boutique de café" />
+    </figure>
+    <div class="shop-infoContent">
+      <h2 class="title">Une atmosphère douce</h2>
+      <p>
+        L'atmosphère est empreinte d'une <strong>lueur chaleureuse</strong>, avec des lumières tamisées qui créent des jeux d'ombres et de lumières apaisants.
+        Les murs sont ornés d'éléments rustiques, de panneaux en bois et de <strong>photographies captivantes</strong> de plantations de café, évoquant l'origine de ces délices aromatiques.
+      </p>
+    </div>
+  </section>
+
+  <blockquote class="shop-quote">
+    <p>“Un bon café est bien plus qu'une boisson, c'est une expérience qui éveille les sens”</p>
+  </blockquote>
+
+  <section class="shop-amenagement">
+    <figure class="shop-image">
+      <img src="/assets/coffees/coffee6.jpg" alt="Décoration et ambiance de la boutique de café" />
+    </figure>
+    <div class="shop-infoContent">
+      <h2 class="title">Pour votre confort</h2>
+      <p>
+        Les coins douillets sont parsemés de <strong>fauteuils confortables</strong> et de <strong>canapés moelleux</strong>, invitant nos clients à s'installer
+        et à se perdre dans un bon livre, ou simplement à profiter d'une conversation entre amis. L'odeur enivrante du café fraîchement infusé
+        flotte dans l'air, créant une ambiance propice à la détente et à la contemplation.
+      </p>
+    </div>
+  </section>
+  <section class="shop-personnel">
+    <figure class="shop-video">
+      <video controls autoplay muted loop>
+        <source src="/assets/coffees/personnel.mp4" type="video/mp4" />
+        Votre navigateur ne supporte pas la lecture de vidéos.
+      </video>
+    </figure>
+    
+    <div class="shop-infoContent">
+      <h2 class="title">Au petit soin pour vous</h2>
+      <p>
+        Le personnel <strong>attentionné et passionné</strong> est toujours prêt à partager ses connaissances et ses recommandations,
+        créant un lien chaleureux entre les amateurs de café et les artisans qui le préparent avec soin.
+        Chaque visite est une expérience personnelle, où le client est accueilli comme un ami de longue date.
+      </p>
+    </div>
+  </section> 
+
+  <section class="nous-trouver">
+    <h2 class="title">Où nous trouver ?</h2>
+    <p>
+      Venez nous rendre visite dans notre <strong>boutique de café artisanale</strong> pour une
+      <strong>expérience inoubliable</strong>. Nous vous accueillons avec plaisir et passion !
+    </p>
+    <div class="map-container">
+      <!-- Intégration Google Maps pour la localisation -->
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9999999999995!2d2.2944813156746255!3d48.85884407928785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66f0eb1b5dfc7%3A0x8f555a64ff8b4b29!2sTour%20Eiffel!5e0!3m2!1sfr!2sfr!4v1614080106103!5m2!1sfr!2sfr"
+        width="100%" height="400" style="border: 0" allowfullscreen="" loading="lazy"
+        title="Carte interactive montrant l'emplacement de notre boutique de café"></iframe>
+    </div>
+  </section>
+</main>
+
+<%- include('./partials/footer') %>
+
+<script type="module" src="/js/toggleSideBar.js" defer></script>

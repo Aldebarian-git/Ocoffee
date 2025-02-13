@@ -1,0 +1,90 @@
+<%- include('./partials/header') %>
+
+<main>
+  <div class="logout">
+    <form action="/logout" method="POST">
+      <button class="submit-btn delete" type="submit" class="logout-btn">Se déconnecter</button>
+    </form>
+  </div>
+  <section id="admin">
+    <h1>~ Administration des Cafés ~</h1>
+    <div class="adminContainer">
+
+      <section class="add-coffee">
+        <h2>Ajouter un café à la base de données</h2>
+
+        <form class="admin-form" action="/admin/add-coffee" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="name">Nom du Café :</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="form-group">
+            <label for="description">Description :</label>
+            <textarea id="description" name="description" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="reference">Référence :</label>
+            <input type="number" id="reference" name="reference" required />
+          </div>
+          <div class="form-group">
+            <label for="origin">Origine :</label>
+            <input type="text" id="origin" name="origin" required />
+          </div>
+          <div class="form-group">
+            <label for="price_per_kg">Prix au kilo :</label>
+            <input type="number" id="price_per_kg" name="price_per_kg" step="0.01" min="0" pattern="^\d+(\.\d{2})?$" required />
+            <small>Format requis : 00.00</small>
+            <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+              <div class="error-message">
+                <p><%= errorMessage %></p>
+              </div>
+            <% } %>
+          </div>
+
+          <div class="form-group">
+            <label for="category">Category :</label>
+            <input type="text" id="category" name="category" required />
+          </div>
+          <div class="form-group">
+            <label for="available">Est-il disponible en boutique ?</label>
+            <div class="radio-btn">
+              <input type="radio" id="available-yes" name="available" value="true" required />
+              <label for="available-yes">Oui : </label>
+            </div>
+            <div class="radio-btn">
+              <input type="radio" id="available-no" name="available" value="false" />
+              <label for="available-no">Non : </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="image">Choisir une image:</label>
+            <input type="file" name="file" id="file" accept="image/*" required />
+          </div>
+
+          <button class="submit-btn" type="submit">Ajouter</button>
+        </form>
+      </section>
+      
+
+        <section class="search-coffee">
+          <h2>Retrouver un café pour l'éditer ou le supprimer</h2>
+          <form class="admin-form" action="/admin/search-coffee" method="GET">
+            <div class="form-group">
+              <label for="searchterm">Rechercher par référence ou nom (recherche partielle acceptée)</label>
+              <input type="text" id="searchterm" name="searchterm" placeholder='Référence ou nom du café: exemple: "Espr" pour Espresso' />
+            </div>
+            <button class="submit-btn" type="submit">Rechercher</button>
+          </form>     
+          
+        </section>
+      </section>
+      
+      
+      
+
+    </div>
+  </section>
+</main>
+
+<%- include('./partials/footer') %>
+

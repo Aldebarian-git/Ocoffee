@@ -1,0 +1,105 @@
+<%- include('./partials/header') %>
+
+<main>
+    <div class="logout">
+        <form action="/logout" method="POST">
+            <button class="submit-btn delete" type="submit" class="logout-btn">Se déconnecter</button>
+        </form>
+    </div>
+    <section id="admin">
+        <h1>~ Administration des Cafés ~</h1>
+        <h2>Editer un café</h2>
+        <div class="articlesContainer">
+            <section id="product">
+                <div class="productPicture">
+                    <img class="productPicture-img" src="/assets/coffees/<%= coffee.reference %>.png"
+                        alt="Photo du café <%= coffee.name %>" />
+                </div>
+                <div class="productContent">
+                    <span class="badge <%= coffee.category_id %>">
+                        <%= coffee.category_id %>
+                    </span>
+                    <h3 class="coffee-name-h3">
+                        <%= coffee.name %> <img class="leaf" src="/assets/coffees/leaf.svg" alt="Une feuille">
+                    </h3>
+                    <p class="origin">
+                        <%= coffee.origin %>
+                    </p>
+                    <p class="news-paragraph">
+                        <%= coffee.description %>
+                    </p>
+                    <p class="price">
+                        <%= coffee.price_per_kg %>€/kg-<span class="available"> 
+                            <% if (coffee.available) { %>
+                                en stock
+                            <% } else { %>
+                                rupture
+                            <% } %>
+                        </span>
+                    </p>
+                                       
+                </div>
+            </section>
+            <div class="form-edit-coffee-container">
+                <form class="admin-form" action="/admin/edit-coffee/<%= coffee.id %>" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="name">Nom du Café :</label>
+                        <input type="text" id="name" name="name" value="<%= coffee.name %>" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Description :</label>
+                        <textarea id="description" name="description"><%= coffee.description %></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reference">Référence :</label>
+                        <input type="number" id="reference" name="reference" value="<%= coffee.reference %>" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="origin">Origine :</label>
+                        <input type="text" id="origin" name="origin" value="<%= coffee.origin %>" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="price_per_kg">Prix au kilo :</label>
+                        <input type="number" id="price_per_kg" name="price_per_kg" value="<%= coffee.price_per_kg %>" step="0.01" min="0" pattern="^\d+(\.\d{2})?$" />
+                        <small>Format requis : 00.00</small>
+                        <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+                            <div class="error-message">
+                                <p><%= errorMessage %></p>
+                            </div>
+                        <% } %>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="category">Category:</label>
+                        <input type="text" id="category" name="category" value="<%= categoryName %>" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="available">Est-il disponible en boutique ?</label>
+                        <div class="radio-btn">
+                            <input type="radio" id="available-yes" name="available" value="true" <%= coffee.available === 'true' ? 'checked' : '' %> required/>
+                            <label for="available-yes">Oui : </label>
+                        </div>
+                        <div class="radio-btn">
+                            <input type="radio" id="available-no" name="available" value="false" <%= coffee.available === 'false' ? 'checked' : '' %> />
+                            <label for="available-no">Non : </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="image">Choisir une image (facultatif) :</label>
+                        <input type="file" name="file" id="file" accept="image/*" />
+                    </div>
+                    
+                    <button class="submit-btn save" type="submit">Sauvegarder les modifications</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('./partials/footer') %>
