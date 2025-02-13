@@ -149,35 +149,37 @@ const dataMapper = {
   async isAdmin({ username, password }) {
     const query = 'SELECT * FROM "admins" WHERE "username" = $1';
     const values = [username];
-
+  
     try {
       const result = await client.query(query, values);
-
+  
       if (result.rowCount === 0) {
         // Aucun admin trouvé avec ce username
+        console.log("Aucun admin trouvé avec ce username");
         return false;
       }
-
+  
       const admin = result.rows[0];
-
+  
+      // Affichage du mot de passe stocké dans la base de données pour débogage
+      console.log("Mot de passe stocké : ", admin.password);
+  
       // Vérification du mot de passe hashé
       const passwordMatch = await bcrypt.compare(password, admin.password);
-
+  
       if (passwordMatch) {
-        // Si le mot de passe correspond
+        console.log("Mot de passe correct");
         return true;
       } else {
-        // Si le mot de passe ne correspond pas
+        console.log("Mot de passe incorrect");
         return false;
       }
     } catch (error) {
-      console.error(
-        "Erreur lors de la recherche dans la base de données",
-        error
-      );
+      console.error("Erreur lors de la recherche dans la base de données", error);
       return false; // En cas d'erreur, retourne false
     }
   },
+  
 
   async editCoffeeToDatabase(editCoffeeData, coffeeId) {
     try {
