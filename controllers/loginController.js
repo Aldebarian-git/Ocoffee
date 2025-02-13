@@ -14,6 +14,7 @@ const loginController = {
     try {
       // Vérification des identifiants avec le dataMapper
       const isAdmin = await dataMapper.isAdmin(req.body);       
+      console.log(req.body);
       
       if (!isAdmin) {
         res.send("Utilisateur inconnu");
