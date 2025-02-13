@@ -1,7 +1,8 @@
 // createAdmin.js
 
-import { Client } from 'pg';
-import bcrypt from 'bcrypt';
+import pkg from 'pg';
+const { Client } = pkg;
+
 
 // Configuration de la connexion à PostgreSQL (sur Railway)
 const client = new Client({
