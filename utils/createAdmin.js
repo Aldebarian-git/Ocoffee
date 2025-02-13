@@ -1,12 +1,11 @@
-// createAdmin.js
-
 import pkg from 'pg';
-const { Client } = pkg;
+import bcrypt from 'bcrypt';
 
+const { Client } = pkg;
 
 // Configuration de la connexion à PostgreSQL (sur Railway)
 const client = new Client({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.PG_URL,
   ssl: {
     rejectUnauthorized: false
   }
@@ -39,3 +38,4 @@ export const createAdmin = async (username, password) => {
     await client.end();
   }
 };
+
