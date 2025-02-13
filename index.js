@@ -7,8 +7,8 @@ import express from "express";
 import router from "./router.js";
 import session from "express-session";
 
-import { createClient } from "redis";
-const connectRedis = require("connect-redis"); 
+import createClient from "redis";
+import connectRedis from "connect-redis";
 
 
 // Créer un client Redis
