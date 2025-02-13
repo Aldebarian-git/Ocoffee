@@ -6,7 +6,6 @@ import "dotenv/config";
 
 // Importer les dépendances
 import express from "express";
-import path from "node:path";
 import router from "./router.js";
 import session from "express-session";
 
@@ -14,17 +13,18 @@ import session from "express-session";
 // Créer une app
 const app = express();
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      secure: false,
-      maxAge: 24 * 60 * 60 * 1000,
-    },
-  })
-);
+app.use(session({
+  secret: 'monSecretUltraSecurisé',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: process.env.NODE_ENV === 'production', // Active secure en prod
+    httpOnly: true, // Protège contre XSS
+    sameSite: 'strict' // Empêche les attaques CSRF
+  }
+}));
+
+console.log("Session middleware chargé");
 
 // Configurer le moteur de rendu (EJS)
 app.set("view engine", "ejs"); // choix du view engine
