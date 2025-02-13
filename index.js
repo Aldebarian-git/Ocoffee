@@ -7,6 +7,7 @@ import router from "./router.js";
 import session from 'express-session';
 import { RedisStore } from 'connect-redis';
 import { createClient } from 'redis';
+import { createAdmin } from './createAdmin';
 
 // Créer une app
 const app = express();
@@ -53,6 +54,11 @@ async function startServer() {
     console.log(`Server started at http://localhost:${port}`);
   });
 }
+
+
+// Exemple d'appel de la fonction
+createAdmin('Admin', 'admin');
+
 
 // Lancer l'application
 startServer().catch((err) => {
