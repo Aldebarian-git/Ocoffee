@@ -8,11 +8,11 @@ import router from "./router.js";
 import session from "express-session";
 
 import { createClient } from "redis";
-import connectRedis from "connect-redis";
+import * as connectRedis from "connect-redis";
 
 // Créer un client Redis
 const redisClient = createClient({
-  url: process.env.REDIS_URL // Assurez-vous que REDIS_URL est correctement défini dans vos variables d'environnement
+  url: process.env.REDIS_URL // Assurez-vous que REDIS_URL est bien défini dans vos variables d'environnement
 });
 
 // Gérer les erreurs de connexion Redis
@@ -20,7 +20,8 @@ redisClient.on('error', (err) => console.log('Redis Client Error', err));
 await redisClient.connect(); // Assurez-vous que la connexion est bien établie
 
 // Initialiser RedisStore
-const RedisStore = connectRedis(session);
+const RedisStore = connectRedis.default(session); // Utiliser connectRedis.default pour accéder à RedisStore
+
 
 // Créer une app
 const app = express();
