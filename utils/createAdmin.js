@@ -11,18 +11,27 @@ const client = new Client({
   }
 });
 
+// Connexion à la base de données (à ne faire qu'une fois)
+await client.connect();
+
 // Fonction pour hasher le mot de passe
 const hashPassword = async (password) => {
-  const saltRounds = 10; // Le nombre de rounds de salage
-  const hashedPassword = await bcrypt.hash(password, saltRounds);
-  return hashedPassword;
+  const saltRounds = 10; // Nombre de rounds pour le salage
+  return await bcrypt.hash(password, saltRounds);
 };
 
 // Fonction pour créer un admin avec un mot de passe hashé
 export const createAdmin = async (username, password) => {
   try {
-    await client.connect();
-    
+    // Vérifier si l'admin existe déjà
+    const checkQuery = 'SELECT * FROM "admins" WHERE username = $1';
+    const existingAdmin = await client.query(checkQuery, [username]);
+
+    if (existingAdmin.rows.length > 0) {
+      console.log("Cet admin existe déjà !");
+      return;
+    }
+
     // Hashage du mot de passe
     const hashedPassword = await hashPassword(password);
 
@@ -34,8 +43,13 @@ export const createAdmin = async (username, password) => {
     console.log("Admin créé avec succès !");
   } catch (error) {
     console.error("Erreur lors de la création de l'admin", error);
-  } finally {
-    await client.end();
   }
 };
+
+// Fermer la connexion proprement à la fin du programme
+process.on('exit', async () => {
+  await client.end();
+  console.log("Connexion à la base de données fermée.");
+});
+
 
