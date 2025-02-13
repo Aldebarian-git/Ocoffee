@@ -8,7 +8,7 @@ import router from "./router.js";
 import session from "express-session";
 
 import { createClient } from "redis";
-import { default as connectRedis } from "connect-redis";
+const connectRedis = require("connect-redis"); 
 
 
 // Créer un client Redis
@@ -18,10 +18,10 @@ const redisClient = createClient({
 
 // Gérer les erreurs de connexion Redis
 redisClient.on('error', (err) => console.log('Redis Client Error', err));
-await redisClient.connect(); // Assurez-vous que la connexion est bien établie
+await redisClient.connect();
 
 // Initialiser RedisStore
-const RedisStore = connectRedis.default(session);
+const RedisStore = connectRedis(session);
 
 
 
@@ -35,7 +35,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: process.env.NODE_ENV === "production", // Assurez-vous que les cookies sont sécurisés en production
+      secure: process.env.NODE_ENV === "production",
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 7 // Exemple : 1 semaine
     },
