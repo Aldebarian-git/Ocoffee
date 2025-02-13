@@ -5,33 +5,35 @@ import "dotenv/config";
 // Importer les dépendances
 import express from "express";
 import router from "./router.js";
-import session from "express-session";
-
-
-
-
-
-
+import session from 'express-session';
+import redis from 'redis';
+import connectRedis from 'connect-redis';
 
 
 // Créer une app
 const app = express();
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET, // Assurez-vous que SESSION_SECRET est bien défini
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      secure: process.env.NODE_ENV === "production", // Utilisation du cookie sécurisé en production (HTTPS)
-      httpOnly: true, // Empêche l'accès au cookie via JavaScript côté client
-      maxAge: 1000 * 60 * 60 * 48, // Durée de validité du cookie (48 heures ici)
-      sameSite: 'none', // Permet l'envoi de cookies dans un contexte inter-domaines (CORS)
-    },
-  })
-);
+// Créer un client Redis
+const redisClient = redis.createClient({
+  host: 'localhost', // Host de Redis (ajuste si nécessaire)
+  port: 6379, // Port de Redis (le port par défaut est 6379)
+});
 
-console.log("Session middleware chargé");
+// Configurer Redis Store pour les sessions
+const RedisStore = connectRedis(session);
+
+// Utiliser les sessions avec Redis Store
+app.use(session({
+  store: new RedisStore({ client: redisClient }), // Utiliser le client Redis pour le store
+  secret: 'your-secret-key', // Clé secrète pour signer les sessions
+  resave: false, // Ne pas resauvegarder la session si elle n'a pas changé
+  saveUninitialized: false, // Ne pas sauvegarder les sessions non initialisées
+  cookie: {
+    secure: false, // Définir à `true` si vous utilisez HTTPS (en production)
+    httpOnly: true, // Ne pas rendre le cookie accessible via JavaScript
+    maxAge: 1000 * 60 * 60 * 24, // Durée de vie du cookie (par exemple 1 jour)
+  },
+}));
 
 // Configurer le moteur de rendu (EJS)
 app.set("view engine", "ejs"); // choix du view engine
