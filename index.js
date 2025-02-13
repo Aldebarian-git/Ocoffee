@@ -6,26 +6,35 @@ import "dotenv/config";
 import express from "express";
 import router from "./router.js";
 import session from "express-session";
-import * as RedisStore from "connect-redis";
-import { createClient } from "redis";
 
-// Connexion à Redis
-const redisClient = createClient({ url: process.env.REDIS_URL });
-redisClient.connect().catch(console.error);
+import { createClient } from "redis";
+import connectRedis from "connect-redis";
+
+// Créer un client Redis
+const redisClient = createClient({
+  url: process.env.REDIS_URL // Assurez-vous que REDIS_URL est correctement défini dans vos variables d'environnement
+});
+
+// Gérer les erreurs de connexion Redis
+redisClient.on('error', (err) => console.log('Redis Client Error', err));
+await redisClient.connect(); // Assurez-vous que la connexion est bien établie
+
+// Initialiser RedisStore
+const RedisStore = connectRedis(session);
 
 // Créer une app
 const app = express();
 
 app.use(
   session({
-    store: new RedisStore({ client: redisClient }),
-    secret: process.env.SESSION_SECRET || "supersecret",
+    store: new RedisStore({ client: redisClient }), // Utilisation de RedisStore avec le client Redis
+    secret: process.env.SESSION_SECRET, // Assurez-vous que SESSION_SECRET est bien défini
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: process.env.NODE_ENV === "production", // Activer HTTPS en prod
+      secure: process.env.NODE_ENV === "production", // Assurez-vous que les cookies sont sécurisés en production
       httpOnly: true,
-      sameSite: "lax",
+      maxAge: 1000 * 60 * 60 * 24 * 7 // Exemple : 1 semaine
     },
   })
 );
