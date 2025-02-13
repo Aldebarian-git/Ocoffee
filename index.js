@@ -7,23 +7,32 @@ import express from "express";
 import router from "./router.js";
 import session from 'express-session';
 import redis from 'redis';
-import { default as connectRedis } from 'connect-redis';
+import RedisStoreFactory from 'connect-redis';
 
 
 // Créer une app
 const app = express();
 
-// Connexion à Redis via les variables d'environnement de Railway
+// Création du client Redis
 const redisClient = redis.createClient({
-  host: process.env.REDIS_HOST,
-  port: process.env.REDIS_PORT || 6379,
-  password: process.env.REDIS_PASSWORD,
+  url: process.env.REDIS_URL, // Assure-toi que cette variable est bien définie dans ton .env
+  socket: {
+    host: process.env.REDIS_HOST || 'localhost',
+    port: process.env.REDIS_PORT || 6379,
+  },
+  password: process.env.REDIS_PASSWORD || undefined,
 });
 
-// Configurer Redis Store pour les sessions
-const RedisStore = connectRedis(session);
+// Gestion des erreurs de connexion Redis
+redisClient.on('error', (err) => console.error('Redis error:', err));
 
-// Utiliser les sessions avec Redis Store
+await redisClient.connect(); // Connexion explicite pour les versions récentes de Redis
+
+// Création du store Redis pour express-session
+const RedisStore = RedisStoreFactory(session);
+
+
+// Configuration de la session avec Redis
 app.use(session({
   store: new RedisStore({ client: redisClient }),
   secret: process.env.SESSION_SECRET || 'your-secret-key',
@@ -32,7 +41,7 @@ app.use(session({
   cookie: {
     secure: process.env.NODE_ENV === 'production',
     httpOnly: true,
-    maxAge: 1000 * 60 * 60 * 24, // Durée de vie du cookie (1 jour)
+    maxAge: 1000 * 60 * 60 * 24, // 1 jour
   },
 }));
 
