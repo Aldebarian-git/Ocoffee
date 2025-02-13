@@ -28,11 +28,11 @@ app.use(
 
 // Configurer le moteur de rendu (EJS)
 app.set("view engine", "ejs"); // choix du view engine
-app.set("views", path.join(import.meta.dirname, "views")); // préciser la localisation du dossier "views"
+app.set("views", "views"); // préciser la localisation du dossier "views"
 
 // Configurer un dossier d'assets statiques
 // Permet de rendre accessible via leur chemin de fichier tous les fichiers présents dans le dossier "public".
-app.use(express.static(path.join(import.meta.dirname, "public")));
+app.use(express.static( "public"));
 
 // Ajout d'un body parser (avant le router)
 app.use(express.urlencoded({ extended: true })); // permet de récupérer les données du PAYLOAD des <form> et les ajouter à req.body
