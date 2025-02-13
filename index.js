@@ -7,7 +7,7 @@ import router from "./router.js";
 import session from 'express-session';
 import { RedisStore } from 'connect-redis';
 import { createClient } from 'redis';
-import { createAdmin } from '.utils/createAdmin.js';
+import { createAdmin } from './utils/createAdmin.js';
 
 // Créer une app
 const app = express();
