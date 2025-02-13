@@ -8,7 +8,8 @@ import router from "./router.js";
 import session from "express-session";
 
 import { createClient } from "redis";
-import connectRedis from "connect-redis";
+import { default as connectRedis } from "connect-redis";
+
 
 // Créer un client Redis
 const redisClient = createClient({
@@ -20,7 +21,7 @@ redisClient.on('error', (err) => console.log('Redis Client Error', err));
 await redisClient.connect(); // Assurez-vous que la connexion est bien établie
 
 // Initialiser RedisStore
-const RedisStore = connectRedis(session); // Utiliser directement connectRedis avec session
+const RedisStore = connectRedis.default(session);
 
 
 
