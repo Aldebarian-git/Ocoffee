@@ -6,7 +6,7 @@ import "dotenv/config";
 import express from "express";
 import router from "./router.js";
 import session from "express-session";
-import { default as RedisStore } from "connect-redis";
+import * as RedisStore from "connect-redis";
 import { createClient } from "redis";
 
 // Connexion à Redis
