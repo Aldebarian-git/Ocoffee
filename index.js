@@ -11,6 +11,7 @@ import { createClient } from "redis";
 
 // Créer une app
 const app = express();
+app.set("trust proxy", 1);
 
 async function startServer() {
   let sessionMiddleware;
