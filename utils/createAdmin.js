@@ -53,3 +53,9 @@ process.on('exit', async () => {
 });
 
 
+
+// JOUER CETTE FONCTION DANS INDEX JS SI BESOIN
+// Exemple d'appel de la fonction
+// createAdmin("Admin", "admin");
+
+
