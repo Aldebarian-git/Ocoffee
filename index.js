@@ -18,9 +18,9 @@ async function startServer() {
   if (process.env.NODE_ENV === "production") {
     // Création du client Redis en production
     const redisClient = createClient({ url: process.env.REDIS_URL });
-
     redisClient.on("error", (err) => console.error("Redis Error:", err));
-
+    redisClient.on("connect", () => console.log("Connected to Redis"));
+    
     await redisClient.connect();
 
     const redisStore = new RedisStore({

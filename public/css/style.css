@@ -655,11 +655,11 @@ nav {
 }
 
 .last-btn {
-  left: 10px; /* Bouton à gauche */
+  left: 0px; /* Bouton à gauche */
 }
 
 .next-btn {
-  right: 10px; /* Bouton à droite */
+  right: 0px; /* Bouton à droite */
 }
 
 .news-paragraph {
@@ -762,6 +762,10 @@ nav {
 
 .nous-trouver {
   margin-top: 10px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .nous-trouver video {
   max-width: 100%;  
@@ -769,7 +773,11 @@ nav {
 
 .nous-trouver p {
   text-align: justify;
-  padding-bottom: 10px;
+  padding-bottom: 10px;  
+}
+
+.map-container{
+  width: 100%;
 }
 
 .shop-images {
@@ -1398,25 +1406,25 @@ footer p {
     gap: 0px;
   }
 
-  .shop-album {
+  .nous-trouver {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
     height: 40vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+    background-color: var(--bg-color);
+    margin: auto;   
+    overflow: hidden; 
+    gap: 0px;
   }
-  .album-grid {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    gap: 10px;
-    width: 90%;
+  .map-container {
+    width: 50%;  
   }
-
-  .album-grid img {
-    width: 24%;
-    height: 100%;
+  
+  .nous-trouver p {
+    text-align: justify;
+    padding-bottom: 10px;  
   }
 
   /* COFFEE PAGE DESKTOP */
