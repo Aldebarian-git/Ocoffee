@@ -78,7 +78,19 @@ img {
 
 .coffee-name {
   display: flex;
-}
+  }
+
+  .coffee-name{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.7rem 0;
+    font-family: var(--font-family-logo);
+    font-size: 22px;
+    white-space: nowrap;
+    color: var(--secondary-color);
+  }
 
 .available {
   color: var(--earthy-green);
@@ -586,7 +598,7 @@ nav {
   justify-content: center; /* Centrer le contenu horizontalement */
   align-items: center; /* Centrer verticalement */
   position: relative;
-  width: 100%;
+  width: calc(270px + 100px);
   height: 100%; /* Assurez-vous que le conteneur a une hauteur */
   overflow: hidden; /* Cacher tout excédent de contenu */
 }
@@ -601,31 +613,28 @@ nav {
 
 .article-news-nouveaute {
   display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  width: 270px; 
-  text-align: center;
-  border: none;    
-  padding: 15px;
-  box-shadow: 0px 4px 6px rgba(91, 58, 41, 0.3);
-  background-color: var(--bg-color2);
-  position: relative;
-  height: 420px;  
+    
 }
 
 .article-news-nouveaute.activ {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  width: 270px; 
-  text-align: center;      
-  padding: 15px;
-  box-shadow: 0px 4px 6px rgba(91, 58, 41, 0.3);
-  background-color: var(--bg-color2);
-  position: relative;
-  height: 420px;  
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    width: 270px; 
+    text-align: center;
+    border: none;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;    
+    padding: 15px;
+    box-shadow: 0px 4px 6px rgba(91, 58, 41, 0.1);
+    background-color: var(--bg-color2);
+    position: relative;
+    height: 360px;  
+}
+
+.article-news-nouveaute.activ button.learn-more{
+  margin-top: auto;
 }
 
 .coffee-banner{
@@ -663,9 +672,14 @@ nav {
 }
 
 .news-paragraph {
-  padding: 10px;
+  padding: 0 10px 0.5rem 10px;
   text-align: justify;
   line-height: 1.1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;  /* Limite à 3 lignes */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 16px;
 }
 
 .pictureContainer {
@@ -684,14 +698,42 @@ nav {
   border-bottom-left-radius: 15px;
 }
 
-
-.home-bg {
-  width: 35%;
-  min-height: 200px;
-  max-height: 270px;
-  background: url("/assets/coffees/coffee3.png") center/contain no-repeat;
-  margin: 5rem auto;
+.forYou{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  text-align: center;  
+  height: min-content;
+  padding: 10px;
+  
 }
+
+.forYou-image{
+  width: 40%;
+}
+.forYou img{
+  width: 100%;
+}
+
+.forYou-content{
+  width: 60%;
+}
+
+.forYou-text{
+  text-align: justify;
+}
+
+.forYou p{
+  margin: 15px 0;
+}
+
+.forYou .button-text{
+  width: 135px;
+  white-space: nowrap;
+}
+
+
 /* SHOP PAGE */
 
 /* Section introduction */
@@ -999,16 +1041,17 @@ footer p {
   }
 
   header {
+    display: flex;
     justify-content: space-between;    
   }
-
-
   
 
   nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    
+    
   }
 
   nav ul {
@@ -1120,7 +1163,8 @@ footer p {
 }
 
 .hidden-content-container.actived {
-  max-height: 2500px; /* Ajuste la hauteur selon ton besoin */
+  max-height: 2500px;
+   /* Ajuste la hauteur selon ton besoin */
 }
 
 .hidden-content-container.actived .hidden-content {
@@ -1194,11 +1238,15 @@ footer p {
     gap: 15px;
   }
 
+  .newsSlider {    
+    width: min-content;     
+  }
+
   .article-news-nouveaute {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: start;
     width: 270px; 
     text-align: center;
     border: none;
@@ -1210,14 +1258,21 @@ footer p {
     box-shadow: 0px 4px 6px rgba(91, 58, 41, 0.1);
     background-color: var(--bg-color2);
     position: relative;
-    height: 450px;  
+    height: 360px;  
+  }
+
+  .article-news-nouveaute button.learn-more{
+    margin-top: auto;
+  }
+  .article-news-nouveaute.activ button.learn-more{
+    margin-top: auto;
   }
 
   .article-news-nouveaute.activ {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: start;
     width: 270px; 
     text-align: center;
     border: none;
@@ -1227,7 +1282,7 @@ footer p {
     box-shadow: 0px 4px 6px rgba(91, 58, 41, 0.1);
     background-color: var(--bg-color2);
     position: relative;
-    height: 450px;
+    height: 360px;
     
   }
   
@@ -1235,6 +1290,8 @@ footer p {
   .last-btn, .next-btn{
     display: none;
   }
+
+
   
   
 
@@ -1300,7 +1357,7 @@ footer p {
 
   .introductionContent {
     text-align: justify;
-    max-width: 50%;
+    max-width: 80%;
     margin: auto;
   }
   .shop-image {
@@ -1476,7 +1533,7 @@ p.price {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 1rem 13px;
+  margin: 0.7rem 0;
   font-family: var(--font-family-logo);
   font-size: 22px;
   white-space: nowrap;
