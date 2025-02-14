@@ -4,36 +4,48 @@ import "dotenv/config";
 // Importer les dépendances
 import express from "express";
 import router from "./router.js";
-import session from 'express-session';
-import { RedisStore } from 'connect-redis';
-import { createClient } from 'redis';
-import { createAdmin } from './utils/createAdmin.js';
+import session from "express-session";
+import { RedisStore } from "connect-redis";
+import { createClient } from "redis";
+import { createAdmin } from "./utils/createAdmin.js";
 
 // Créer une app
 const app = express();
 
 async function startServer() {
-  // Création du client Redis
-  const redisClient = createClient({ url: process.env.REDIS_URL });
+  let sessionMiddleware;
 
-  redisClient.on('error', (err) => console.error('Redis Error:', err));
+  if (process.env.NODE_ENV === "production") {
+    // Création du client Redis en production
+    const redisClient = createClient({ url: process.env.REDIS_URL });
 
-  await redisClient.connect();
+    redisClient.on("error", (err) => console.error("Redis Error:", err));
 
-  const redisStore = new RedisStore({
-    client: redisClient,
-    disableTouch: true,
-  });
+    await redisClient.connect();
 
-  app.use(
-    session({
+    const redisStore = new RedisStore({
+      client: redisClient,
+      disableTouch: true,
+    });
+
+    sessionMiddleware = session({
       store: redisStore,
       secret: process.env.SESSION_SECRET,
       resave: false,
       saveUninitialized: false,
+      cookie: { secure: true, httpOnly: true, maxAge: 1000 * 60 * 60 * 24 },
+    });
+  } else {
+    // Utilisation de la session Express classique en développement
+    sessionMiddleware = session({
+      secret: process.env.SESSION_SECRET,
+      resave: false,
+      saveUninitialized: false,
       cookie: { secure: false, httpOnly: true, maxAge: 1000 * 60 * 60 * 24 },
-    })
-  );
+    });
+  }
+
+  app.use(sessionMiddleware);
 
   // Configurer le moteur de rendu (EJS)
   app.set("view engine", "ejs");
@@ -55,13 +67,12 @@ async function startServer() {
   });
 }
 
-
 // Exemple d'appel de la fonction
-createAdmin('Admin', 'admin');
-
+createAdmin("Admin", "admin");
 
 // Lancer l'application
 startServer().catch((err) => {
   console.error("Error starting server:", err);
 });
+
 
