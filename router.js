@@ -24,10 +24,10 @@ router.post("/login/admin",loginController.renderLoginSuccesPage);
 router.post("/logout",loginController.logOut);
 
 // Applique le middleware upload à la route d'ajout de café
-router.post("/admin/add-coffee",upload.single("file"), adminController.addCoffee);
-router.post("/admin/delete-coffee",adminController.deleteCoffee);
-router.post("/admin/edit-coffee/:id",upload.single("file"),adminController.editCoffee);
-router.get("/admin/edit-coffee/:id",adminController.renderEditCoffeePage);
+router.post("/admin/add-coffee",authMiddleware.isAdminMiddleware,upload.single("file"), adminController.addCoffee);
+router.post("/admin/delete-coffee",authMiddleware.isAdminMiddleware,adminController.deleteCoffee);
+router.post("/admin/edit-coffee/:id",authMiddleware.isAdminMiddleware,upload.single("file"),adminController.editCoffee);
+router.get("/admin/edit-coffee/:id",authMiddleware.isAdminMiddleware,adminController.renderEditCoffeePage);
 
 router.get("/admin/search-coffee", adminController.renderResultSearchPage);
 
