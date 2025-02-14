@@ -700,7 +700,7 @@ nav {
 
 .forYou{
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;  
@@ -710,14 +710,25 @@ nav {
 }
 
 .forYou-image{
-  width: 40%;
+  width: 270px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .forYou img{
-  width: 100%;
+  width: 50%;
 }
 
 .forYou-content{
-  width: 60%;
+  width: 270px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.forYou-content img{
+  width: 50px;
 }
 
 .forYou-text{
@@ -1291,6 +1302,45 @@ footer p {
     display: none;
   }
 
+  .forYou{   
+    flex-direction: row-reverse;    
+  }
+  
+  .forYou-image{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .forYou img{
+    width: 100%;
+  }
+  
+  .forYou-content{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .forYou-content img{
+    width: 50px;
+  }
+  
+  .forYou-text{
+    text-align: justify;
+  }
+  
+  .forYou p{
+    margin: 15px 0;
+  }
+  
+  .forYou .button-text{
+    width: 135px;
+    white-space: nowrap;
+  }
+
 
   
   
@@ -1350,6 +1400,16 @@ footer p {
     gap: 0px;
   }
 
+  .introductionShop{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+ 
+
   .shop-introduction p{
     width: 60%;
   }
@@ -1361,7 +1421,7 @@ footer p {
     margin: auto;
   }
   .shop-image {
-    width: 50%;
+    width: 100%;
   }
   .shop-image img {
     width: 100%;
@@ -1380,11 +1440,9 @@ footer p {
     gap: 0px;
   }
   .shop-image{
-    width: 50%;
-    
-    
-    
+    width: 50%;   
       }
+
   .shop-image img{
     width: 100%;
     height: 100%;
