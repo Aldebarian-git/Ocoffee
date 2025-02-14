@@ -29,7 +29,7 @@ router.post("/admin/delete-coffee",authMiddleware.isAdminMiddleware,adminControl
 router.post("/admin/edit-coffee/:id",authMiddleware.isAdminMiddleware,upload.single("file"),adminController.editCoffee);
 router.get("/admin/edit-coffee/:id",authMiddleware.isAdminMiddleware,adminController.renderEditCoffeePage);
 
-router.get("/admin/search-coffee", adminController.renderResultSearchPage);
+router.get("/admin/search-coffee",authMiddleware.isAdminMiddleware, adminController.renderResultSearchPage);
 
 // Middleware 404
 router.use((req, res) => {
