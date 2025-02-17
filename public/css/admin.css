@@ -28,7 +28,7 @@ h1{
     font-family: var(--font-family-logo);
     font-size: clamp(22px, 3vw, 32px);
     padding: 2rem 0;
-    border-top: 1px solid var(--secondary-color);
+    
 }
 
 .admin-form{
@@ -79,10 +79,11 @@ h1{
 }
 
 .admin-login{
-    min-height: calc(100vh - 296px);
+    min-height: calc(100vh - 280px);
     display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
+    margin: 0 auto; 
 }
 
 .add-coffee, .delete-coffee, .search-coffee{
@@ -97,13 +98,20 @@ h1{
     min-height: 150px;
 }
 
-.logout{
-    position: fixed;
-    top: 50px;
-    right: 50px;
-    width: min-content;
+
+
+.logout-btn{
+    background: red;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 0 1rem; 
+    color: white;
     white-space: nowrap;
-    z-index: 5000;
+}
+.logout-btn:hover{
+    background: white;
+    color: red;
+    border: 1px solid red;
 }
 
 #product{
@@ -139,6 +147,30 @@ a{
     display: flex;
     flex-direction: column;
 
+}
+
+.admin-title-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-top: 1px solid var(--secondary-color);
+}
+
+.btn-back{
+    text-decoration: none;
+    background: red;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 0 1rem;
+    
+}
+
+.btn-back:hover{
+    background: white;
+    color: red;
+    border: 1px solid red;
 }
 
 

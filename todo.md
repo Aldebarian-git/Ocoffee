@@ -8,7 +8,8 @@ TODOLIST
 - [X] PERMETTRE LE LOGIN pour admin
 - [ ] Rajouter un bouton retour sur les page admin
 - [ ] Rajouter un formulaire rechercher sur le site
-- [ ] Rajouter au clique sur logo retour accueil
+- [X] Rajouter au clique sur logo retour accueil
+- [ ] Rajouter des messages de confirmation à l'édition des cafés
 
 -- [X] Rajouter le formulaire de contact
 - [X] Décaler le bouton category

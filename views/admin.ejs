@@ -1,13 +1,17 @@
 <%- include('./partials/header') %>
 
 <main>
-  <div class="logout">
-    <form action="/logout" method="POST">
-      <button class="submit-btn delete" type="submit" class="logout-btn">Se déconnecter</button>
-    </form>
-  </div>
+  
   <section id="admin">
-    <h1>~ Administration des Cafés ~</h1>
+    <div class="admin-title-container">
+      <a href="/login" class="btn-back">Retour</a>
+      <h1>~ Administration des Cafés ~</h1>
+      <div class="logout">
+        <form action="/logout" method="POST">
+          <button type="submit" class="logout-btn">Se déconnecter</button>
+        </form>
+      </div>      
+    </div>
     <div class="adminContainer">
 
       <section class="add-coffee">
