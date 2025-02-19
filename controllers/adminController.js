@@ -126,6 +126,12 @@ const adminController = {
       // Si le prix est valide, on formate à 2 décimales
       editCoffeeData.price_per_kg = price.toFixed(2);
 
+      req.session.popUpMessage = {
+        notificationTitle: "Café édité avec succès",
+        details: `Le café ${editCoffeeData.name} a été modifié`,
+      };
+      console.log(req.session.popUpMessage);
+
       // Si l'utilisateur est admin, on peut editer le café à la base de données
       await dataMapper.editCoffeeToDatabase(editCoffeeData, coffeeId);
 
