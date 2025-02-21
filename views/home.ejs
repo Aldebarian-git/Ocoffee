@@ -91,7 +91,7 @@
         <article class="article-news-nouveaute">
           <div class="pictureContainer">
             <img class="article-picture"
-              src="assets/coffees/<%= coffee.reference %>.png"
+            src="<%= process.env.NODE_ENV === 'production' ? '/coffeesUp/' + coffee.reference + '.png' : '/assets/coffees/' + coffee.reference + '.png' %>"
               alt="Photo du café <%= coffee.name %>"/>
             <span class="badge nouveaute">Nouveauté</span>
           </div>
