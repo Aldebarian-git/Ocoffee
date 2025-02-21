@@ -1,41 +1,31 @@
 <%- include('./partials/header') %>
 
-<main>
-  <section class="admin-login">
-    <h2>Connexion Administrateur</h2>
-    <form class="admin-form" action="/login/admin" method="POST">
-      <div class="form-group">
-        <label for="username">Nom d'utilisateur :</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          placeholder="Entrez votre identifiant"
-          required
-        />
-      </div>
+  <main>
+    <section class="admin-login">
+      <h2 class="login-title">~ Connexion Administrateur ~</h2>
+      <form class="admin-form" action="/login/admin" method="POST">
+        <div class="form-group">
+          <label for="username">Nom d'utilisateur :</label>
+          <input type="text" id="username" name="username" placeholder="Entrez votre identifiant" required />
+        </div>
 
-      <div class="form-group">
-        <label for="password">Mot de passe :</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Entrez votre mot de passe"
-          required
-        />
-      </div>
+        <div class="form-group">
+          <label for="password">Mot de passe :</label>
+          <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required />
+        </div>
 
-      <% if (typeof loginErrorMessage !== 'undefined' && loginErrorMessage) { %>
-      <div class="login-error-message">
-        <p><%= loginErrorMessage %></p>
-      </div>
-      <% } %>
+        <% if (typeof loginErrorMessage !=='undefined' && loginErrorMessage) { %>
+          <div class="login-error-message">
+            <p>
+              <%= loginErrorMessage %>
+            </p>
+          </div>
+          <% } %>
 
-      <button class="submit-btn login" type="submit">Se connecter</button>
-    </form>
-  </section>
-</main>
+            <button class="submit-btn login" type="submit">Se connecter</button>
+      </form>
+    </section>
+  </main>
 
-<%- include('./partials/footer') %>
-<script type="module" src="/js/toggleSideBar.js" defer></script>
+  <%- include('./partials/footer') %>
+    <script type="module" src="/js/toggleSideBar.js" defer></script>

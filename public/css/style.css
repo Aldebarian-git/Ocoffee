@@ -44,6 +44,13 @@ li {
   transition: 0.3s ease;
 }
 
+.admin-link {
+  color: red;
+}
+.admin-link i {
+  color: red;
+}
+
 .nav-links:hover {
   transform: scale(1.05);
 }

@@ -21,7 +21,7 @@ async function startServer() {
     const redisClient = createClient({ url: process.env.REDIS_URL });
     redisClient.on("error", (err) => console.error("Redis Error:", err));
     redisClient.on("connect", () => console.log("Connected to Redis"));
-    
+
     await redisClient.connect();
 
     const redisStore = new RedisStore({
@@ -58,6 +58,11 @@ async function startServer() {
   // Ajout d'un body parser
   app.use(express.urlencoded({ extended: true }));
 
+  app.use((req, res, next) => {
+    res.locals.admin = req.session.isAdmin || false;
+    next();
+  });
+
   // Brancher le routeur
   app.use(router);
 
@@ -72,5 +77,3 @@ async function startServer() {
 startServer().catch((err) => {
   console.error("Error starting server:", err);
 });
-
-
