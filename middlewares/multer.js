@@ -2,19 +2,14 @@ import multer from "multer";
 import path from "node:path";
 import fs from "fs";
 
-// Vérifie si l'environnement est en production
-const isProduction = process.env.NODE_ENV === "production";
-
-// Configuration Multer (unique et globale)
+// Configuration Multer
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    // Définir le répertoire de destination en fonction de l'environnement
-    const dir = isProduction
-      ? "/mnt/data/coffees" // Répertoire pour la production
-      : path.join(process.cwd(), "public", "assets", "coffees"); // Répertoire pour le développement
+    // Utilise le volume monté /mnt/data pour le stockage
+    const dir = path.join("/mnt/data", "coffees");
 
-    // Vérifie si le dossier existe, sinon le crée (uniquement en développement)
-    if (!fs.existsSync(dir) && !isProduction) {
+    // Vérifie si le dossier existe, sinon le crée
+    if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
 
@@ -30,12 +25,7 @@ const storage = multer.diskStorage({
     }
 
     const fileName = `${req.body.reference}.png`;
-    const filePath = path.join(
-      isProduction
-        ? "/mnt/data/coffees"
-        : path.join(process.cwd(), "public", "assets", "coffees"),
-      fileName
-    );
+    const filePath = path.join("/mnt/data", "coffees", fileName);
 
     // Vérifie si le fichier existe déjà et le supprime avant d'enregistrer le nouveau
     if (fs.existsSync(filePath)) {
