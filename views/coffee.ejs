@@ -1,46 +1,48 @@
 <%- include('./partials/header') %>
 
-  <main> 
+  <main>
     <figure class="coffee-banner">
       <video controls autoplay muted loop>
         <source src="/assets/coffees/coffee-banner.mp4" type="video/mp4" />
         Votre navigateur ne supporte pas la lecture de vidéos.
       </video>
     </figure>
-      <section id="product">
-        <div class="productPicture">
-          <img class="productPicture-img" src="/assets/coffees/<%= coffee.reference %>.png"
-          alt="Photo du café <%= coffee.name %>"/>                    
-        </div>
-        <div class="productContent">
-          <span class="badge <%= coffee.category %>">
-            <%= coffee.category %>
-          </span>          
-          <h3 class="coffee-name-h3">
-            <%= coffee.name %> <img class="leaf" src="/assets/coffees/leaf.svg" alt="Une feuille">
-          </h3>
-          <p class="origin">
-            <%= coffee.origin %>
-          </p>
-          <p class="news-paragraph">
-            <%= coffee.description %>
-          </p>
-          <p class="price">
-            <%= coffee.price_per_kg %>€/kg-<span class="available"> <% if (coffee.available) { %>
-                 en stock
+    <section id="product">
+      <div class="productPicture">
+        src="<%= process.env.NODE_ENV==='production' ? '/coffeesUp/' + coffee.reference + '.png' : '/assets/coffees/' +
+          coffee.reference + '.png' %>"
+          alt="Photo du café <%= coffee.name %>"/>
+      </div>
+      <div class="productContent">
+        <span class="badge <%= coffee.category %>">
+          <%= coffee.category %>
+        </span>
+        <h3 class="coffee-name-h3">
+          <%= coffee.name %> <img class="leaf" src="/assets/coffees/leaf.svg" alt="Une feuille">
+        </h3>
+        <p class="origin">
+          <%= coffee.origin %>
+        </p>
+        <p class="news-paragraph">
+          <%= coffee.description %>
+        </p>
+        <p class="price">
+          <%= coffee.price_per_kg %>€/kg-<span class="available">
+              <% if (coffee.available) { %>
+                en stock
                 <% } else { %>
                   rupture
                   <%}%>
-                  
-                </span>
-              </p>
-              <%- include("partials/btn", { link: "/catalog" , text: "CATALOGUE" }) %>
-            </div>
-          </div>        
-          
-          
-        </section>      
+
+            </span>
+        </p>
+        <%- include("partials/btn", { link: "/catalog" , text: "CATALOGUE" }) %>
+      </div>
+      </div>
+
+
+    </section>
   </main>
 
   <%- include('./partials/footer') %>
-  <script type="module" src="/js/toggleSideBar.js" defer></script>
+    <script type="module" src="/js/toggleSideBar.js" defer></script>
