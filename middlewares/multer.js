@@ -13,8 +13,8 @@ const storage = multer.diskStorage({
       ? "/mnt/data/coffees" // Répertoire pour la production
       : path.join(process.cwd(), "public", "assets", "coffees"); // Répertoire pour le développement
 
-    // Vérifie si le dossier existe, sinon le crée
-    if (!fs.existsSync(dir)) {
+    // Vérifie si le dossier existe, sinon le crée (uniquement en développement)
+    if (!fs.existsSync(dir) && !isProduction) {
       fs.mkdirSync(dir, { recursive: true });
     }
 
