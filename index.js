@@ -58,7 +58,7 @@ async function startServer() {
   app.use(express.static("public"));
 
   // Serve les fichiers d'images depuis /mnt/data/coffees
-  app.use("/coffees", express.static(path.join("/mnt/data", "coffees")));
+  app.use("/coffees", express.static(path.join("/mnt/assets", "coffees")));
 
   // Ajout d'un body parser
   app.use(express.urlencoded({ extended: true }));
