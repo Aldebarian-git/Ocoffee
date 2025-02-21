@@ -1,103 +1,100 @@
 <%- include('./partials/header') %>
 
-    <main>
-        
-        <section id="admin">
-          <div class="admin-title-container">
-            <a href="/login/admin" class="btn-back">Retour</a>
-            <h1>~ Administration des Cafés ~</h1>
-            <div class="logout">
-              <form action="/logout" method="POST">
-                <button type="submit" class="logout-btn">Se déconnecter</button>
-              </form>
-            </div>      
-          </div>
-            <h2>Votre résultat pour : "<%= searchterm %>"</h2>
-            <div class="articlesContainer">
-                <% coffees.forEach((coffee) => { %>
-                    <article
-                      class="article-news <%= coffee.category %> <%= coffee.origin.replace(/ /g, '-') %>"
-                    >
-                      <div class="pictureContainer">
-                        <img
-                          class="article-picture"
-                          src="/assets/coffees/<%= coffee.reference %>.png"
-                          alt="Photo du café <%= coffee.name %>"
-                        />
-                        <span class="badge <%= coffee.category %>">
-                          <%= coffee.category %>
-                        </span>
-                      </div>
-                      <h3 class="coffee-name">
-                        <%= coffee.name %>
-                        <img
-                          class="leaf"
-                          src="/assets/coffees/leaf.svg"
-                          alt="Une feuille"
-                        />
-                      </h3>
-                      <p><%= coffee.origin %></p>
-                      <p class="price">
-                        <%= coffee.price_per_kg %>€ /kg <% if (coffee.available) { %>
-                        <span class="available">en stock</span>
-                        <% } else { %>
-                        <span class="non-available">rupture</span>
-                        <% } %>
-                      </p>
-                      <form class="admin-form" action="/admin/delete-coffee" method="POST">
-                        <div class="form-group">
-                          <label for="reference">Référence du café à supprimer :</label>
-                          <input type="text" id="reference" name="reference" value="<%= coffee.reference %>" required />
-                        </div>
-                        <% if (typeof noReferenceFindMessage !== 'undefined' && noReferenceFindMessage) { %>
-                          <div class="noReferenceFindMessage">
-                            <p><%= noReferenceFindMessage %></p>
-                          </div>
-                        <% } %>
-                        <div class="btn-admin-container">
-                            <button class="submit-btn delete" type="submit">Supprimer</button>
-                            <a href="/admin/edit-coffee/<%= coffee.id %>" class="submit-btn">Editer</a>
+  <main>
 
-                        </div>
-                      </form>                      
-                    </article>
-                    
-                    <% }) %>
-                    
-                      
-                  </div> 
-                  
-
-
-
-
+    <section id="admin">
+      <div class="admin-title-container">
+        <a href="/login/admin" class="btn-back">Retour</a>
+        <h1>~ Administration des Cafés ~</h1>
+        <div class="logout">
+          <form action="/logout" method="POST">
+            <button type="submit" class="logout-btn">Se déconnecter</button>
+          </form>
+        </div>
+      </div>
+      <h2>Votre résultat pour : "<%= searchterm %>"</h2>
+      <div class="articlesContainer">
+        <% coffees.forEach((coffee)=> { %>
+          <article class="article-news <%= coffee.category %> <%= coffee.origin.replace(/ /g, '-') %>">
+            <div class="pictureContainer">
+              <img class="article-picture"
+                src="<%= process.env.NODE_ENV === 'production' ? '/coffeesUp/' + coffee.reference + '.png' : '/assets/coffees/' + coffee.reference + '.png' %>"
+                alt="Photo du café <%= coffee.name %>" />
+              <span class="badge <%= coffee.category %>">
+                <%= coffee.category %>
+              </span>
             </div>
-        
-                
+            <h3 class="coffee-name">
+              <%= coffee.name %>
+                <img class="leaf" src="/assets/coffees/leaf.svg" alt="Une feuille" />
+            </h3>
+            <p>
+              <%= coffee.origin %>
+            </p>
+            <p class="price">
+              <%= coffee.price_per_kg %>€ /kg <% if (coffee.available) { %>
+                  <span class="available">en stock</span>
+                  <% } else { %>
+                    <span class="non-available">rupture</span>
+                    <% } %>
+            </p>
+            <form class="admin-form" action="/admin/delete-coffee" method="POST">
+              <div class="form-group">
+                <label for="reference">Référence du café à supprimer :</label>
+                <input type="text" id="reference" name="reference" value="<%= coffee.reference %>" required />
+              </div>
+              <% if (typeof noReferenceFindMessage !=='undefined' && noReferenceFindMessage) { %>
+                <div class="noReferenceFindMessage">
+                  <p>
+                    <%= noReferenceFindMessage %>
+                  </p>
+                </div>
+                <% } %>
+                  <div class="btn-admin-container">
+                    <button class="submit-btn delete" type="submit">Supprimer</button>
+                    <a href="/admin/edit-coffee/<%= coffee.id %>" class="submit-btn">Editer</a>
+
+                  </div>
+            </form>
+          </article>
+
+          <% }) %>
+
+
+      </div>
+
+
+
+
+
+      </div>
+
+
 
     </section>
-    </main>
+  </main>
 
-    <%- include('./partials/footer') %>
+  <%- include('./partials/footer') %>
 
-    
+
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const deleteButtons = document.querySelectorAll(".admin-form .delete");
+      document.addEventListener("DOMContentLoaded", function () {
+        const deleteButtons = document.querySelectorAll(".admin-form .delete");
 
-            deleteButtons.forEach((button) => {
-                button.addEventListener("click", function (event) {
-                    const confirmDelete = confirm(
-                        "Voulez-vous vraiment supprimer ce café ? Cette action est irréversible !"
-                    );
-                    if (!confirmDelete) {
-                        event.preventDefault(); // Empêche l'envoi du formulaire si l'utilisateur annule
-                    }
-                });
-            });
+        deleteButtons.forEach((button) => {
+          button.addEventListener("click", function (event) {
+            const confirmDelete = confirm(
+              "Voulez-vous vraiment supprimer ce café ? Cette action est irréversible !"
+            );
+            if (!confirmDelete) {
+              event.preventDefault(); // Empêche l'envoi du formulaire si l'utilisateur annule
+            }
+          });
         });
+      });
     </script>
     <script type="module" src="/js/toggleSideBar.js" defer></script>
-</body>
-</html>
+    </body>
+
+    </html>

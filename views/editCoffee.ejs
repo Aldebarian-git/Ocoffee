@@ -17,7 +17,8 @@
                 <div class="articlesContainer">
                     <section id="product">
                         <div class="productPicture">
-                            <img class="productPicture-img" src="/assets/coffees/<%= coffee.reference %>.png"
+                            <img class="productPicture-img"
+                                src="<%= process.env.NODE_ENV === 'production' ? '/coffeesUp/' + coffee.reference + '.png' : '/assets/coffees/' + coffee.reference + '.png' %>"
                                 alt="Photo du café <%= coffee.name %>" />
                         </div>
                         <div class="productContent">

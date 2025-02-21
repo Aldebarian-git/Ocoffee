@@ -47,11 +47,10 @@
           class="article-news <%= coffee.category.toLowerCase() %> <%= coffee.origin.toLowerCase().replace(/ /g, '-') %> <%= index >= 3 ? 'hidden' : '' %>"
         >
           <div class="pictureContainer">
-            <img
-              class="article-picture"
-              src="assets/coffees/<%= coffee.reference %>.png"
-              alt="Photo du café <%= coffee.name %>"
-            />
+            <img class="article-picture"
+   src="<%= process.env.NODE_ENV === 'production' ? '/coffeesUp/' + coffee.reference + '.png' : '/assets/coffees/' + coffee.reference + '.png' %>"
+   alt="Photo du café <%= coffee.name %>" />
+
             <span class="badge <%= coffee.category %>">
               <%= coffee.category %>
             </span>
