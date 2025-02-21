@@ -20,8 +20,8 @@ const adminController = {
       // Détermination du chemin du fichier en fonction de l'environnement
       const imageDirectory =
         process.env.NODE_ENV === "production"
-          ? path.join("/mnt/data/coffees") // Volume Railway
-          : path.join(process.cwd(), "public", "assets", "coffees"); // Dev
+          ? path.join("/mnt/data/coffeesUp") // Volume Railway
+          : path.join(process.cwd(), "public", "assets", "coffeesUp"); // Dev
 
       const filePath = path.join(imageDirectory, `${reference}.png`);
 
