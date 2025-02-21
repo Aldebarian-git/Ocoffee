@@ -7,6 +7,7 @@ import router from "./router.js";
 import session from "express-session";
 import { RedisStore } from "connect-redis";
 import { createClient } from "redis";
+import { path } from "path";
 // import { createAdmin } from "./utils/createAdmin.js";
 
 // Créer une app
@@ -54,6 +55,9 @@ async function startServer() {
 
   // Configurer un dossier d'assets statiques
   app.use(express.static("public"));
+
+  // Serve les fichiers d'images depuis /mnt/data/coffees
+  app.use("/coffees", express.static(path.join("/mnt/data", "coffees")));
 
   // Ajout d'un body parser
   app.use(express.urlencoded({ extended: true }));
