@@ -399,7 +399,7 @@ header {
   height: 100vh;
   background: var(--earthy-green);
   top: 0;
-  right: -230px; /* Utiliser right au lieu de left */
+  right: -230px; /* Utiliser  */
   transition: 0.5s ease-out;
   z-index: 99999;
   display: flex;
