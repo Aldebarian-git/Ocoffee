@@ -12,8 +12,8 @@ const storage = multer.diskStorage({
     let dir;
 
     if (isProduction) {
-      // Enregistre dans le volume monté à /mnt/data/coffees
-      dir = path.join("/mnt/assets", "coffees");
+      // Enregistre dans le volume monté à /mnt/data/coffeesUp
+      dir = path.join("/mnt/data", "coffeesUp");
     } else {
       // En développement, enregistre dans public/assets/coffees
       dir = path.join(process.cwd(), "public", "assets", "coffees");
