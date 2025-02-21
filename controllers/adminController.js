@@ -17,15 +17,15 @@ const adminController = {
         });
       }
 
-      // Vérification du fichier
-      const filePath = path.join(
-        process.cwd(),
-        "public",
-        "assets",
-        "coffees",
-        `${reference}.png`
-      );
+      // Détermination du chemin du fichier en fonction de l'environnement
+      const imageDirectory =
+        process.env.NODE_ENV === "production"
+          ? path.join("/mnt/data/coffees") // Volume Railway
+          : path.join(process.cwd(), "public", "assets", "coffees"); // Dev
 
+      const filePath = path.join(imageDirectory, `${reference}.png`);
+
+      // Vérification et suppression du fichier
       if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath);
         console.log(`✅ Fichier supprimé: ${filePath}`);
