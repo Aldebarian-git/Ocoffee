@@ -1,6 +1,10 @@
 <%- include('./partials/header') %>
 
   <main>
+    <% if (typeof popUpMessage !== 'undefined' && popUpMessage) { %>
+      <%- include('./partials/popUp') %>
+    <% } %>
+    
     <section class="admin-login">
       <h2 class="login-title">~ Connexion Administrateur ~</h2>
       <form class="admin-form" action="/login/admin" method="POST">
@@ -29,3 +33,7 @@
 
   <%- include('./partials/footer') %>
     <script type="module" src="/js/toggleSideBar.js" defer></script>
+
+    <% if (typeof popUpMessage !== 'undefined' && popUpMessage) { %>
+      <script type="module" src="/js/notification.js" defer></script>
+    <% } %>

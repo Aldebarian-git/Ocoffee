@@ -40,7 +40,7 @@
             </p>
             <form class="admin-form" action="/admin/delete-coffee" method="POST">
               <div class="form-group">
-                <label for="reference">Référence du café à supprimer :</label>
+                <label for="reference">Référence du café</label>
                 <input type="text" id="reference" name="reference" value="<%= coffee.reference %>" required />
               </div>
               <% if (typeof noReferenceFindMessage !=='undefined' && noReferenceFindMessage) { %>

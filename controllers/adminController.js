@@ -7,6 +7,8 @@ const adminController = {
   async deleteCoffee(req, res) {
     try {
       const reference = req.body.reference;
+      
+      
       const result = await dataMapper.deleteCoffeeToDatabase(reference);
 
       if (result === 0) {
@@ -32,6 +34,12 @@ const adminController = {
       } else {
         console.log(`❌ Aucun fichier trouvé pour ${reference}.png`);
       }
+
+      req.session.popUpMessage = {
+        notificationTitle: "Café supprimé avec succès",
+        details: `Le café avec la référence (${reference}) a été supprimé`,
+        type: "succès",
+      };
 
       res.redirect("/admin");
     } catch (error) {
@@ -65,6 +73,12 @@ const adminController = {
       // Si l'utilisateur est admin, on peut ajouter le café à la base de données
       await dataMapper.addCoffeeToDatabase(newCoffeeData);
 
+      req.session.popUpMessage = {
+        notificationTitle: "Café ajouté avec succès",
+        details: `Le café ${newCoffeeData.name} a été ajouté`,
+        type: "succès",
+      };
+
       // Redirection vers la page d'administration après l'ajout
       res.redirect("/admin");
     } catch (error) {
@@ -75,7 +89,11 @@ const adminController = {
 
   async renderAdminPage(req, res) {
     try {
-      res.render("admin", { page: "admin" });
+      // Récupération et suppression du message après affichage
+      const popUpMessage = req.session.popUpMessage;
+      delete req.session.popUpMessage;
+
+      res.render("admin", { page: "admin", popUpMessage });
     } catch (error) {
       console.error(error);
       res.status(500).send("Erreur interne lors du rendu de la page admin");
@@ -102,7 +120,12 @@ const adminController = {
       const popUpMessage = req.session.popUpMessage;
       delete req.session.popUpMessage;
 
-      res.render("editCoffee", { page: "admin", coffee, categoryName, popUpMessage });
+      res.render("editCoffee", {
+        page: "admin",
+        coffee,
+        categoryName,
+        popUpMessage,
+      });
     } catch (error) {
       console.error(error);
       res.status(500).send("Erreur interne lors du rendu de la page admin");
@@ -121,11 +144,13 @@ const adminController = {
         isNaN(price) ||
         !/^(\d+(\.\d{1,2})?)?$/.test(editCoffeeData.price_per_kg)
       ) {
-        return res
-          .status(400)
-          .send(
-            "Le prix par kg doit être un nombre décimal avec 2 chiffres après la virgule."
-          );
+        req.session.popUpMessage = {
+          notificationTitle: "Échec de la modification",
+          details:
+            "Le prix par kg doit être un nombre décimal avec 2 chiffres après la virgule.",
+          type: "error", 
+        };
+        return res.redirect(`/admin/edit-coffee/${coffeeId}`);
       }
       // Si le prix est valide, on formate à 2 décimales
       editCoffeeData.price_per_kg = price.toFixed(2);
@@ -133,7 +158,8 @@ const adminController = {
       req.session.popUpMessage = {
         notificationTitle: "Café édité avec succès",
         details: `Le café ${editCoffeeData.name} a été modifié`,
-      };      
+        type: "succès",
+      };
 
       // Si l'utilisateur est admin, on peut editer le café à la base de données
       await dataMapper.editCoffeeToDatabase(editCoffeeData, coffeeId);
