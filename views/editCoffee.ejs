@@ -106,10 +106,17 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="image">Choisir une image (facultatif) :</label>
                                 <input type="file" name="file" id="file" accept="image/*" />
-                            </div>
+                            </div> -->
+                            <div class="form-group">
+                                <label for="file" class="custom-file-label">
+                                  Choisir une image
+                                  <input type="file" name="file" id="file" accept="image/*" required />
+                                  <span id="file-name" class="file-name"></span>  
+                                </label>            
+                              </div>
 
                             <button class="submit-btn save" type="submit">Sauvegarder les modifications</button>
                         </form>
@@ -121,3 +128,4 @@
     <%- include('./partials/footer') %>
         <script type="module" src="/js/toggleSideBar.js" defer></script>
         <script type="module" src="/js/notification.js" defer></script>
+        <script type="module" src="/js/displayFileName.js" defer></script>
