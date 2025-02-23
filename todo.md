@@ -9,9 +9,10 @@ TODOLIST
 - [x] Rajouter un bouton retour sur les page admin
 - [ ] Rajouter un formulaire rechercher sur le site
 - [x] Rajouter au clique sur logo retour accueil
-- [ ] Rajouter des messages de confirmation à l'édition des cafés
-- [ ] Rajouter les popups de succes ou d'echec
-
+- [X] Rajouter des messages de confirmation à l'édition des cafés
+- [X] Rajouter les popups de succes 
+- [ ] Rajouter les popups d'echec
+- [ ] Sur la page Catalague, revoir le responsive pour la banniere
 -- [X] Rajouter le formulaire de contact
 
 - [x] Décaler le bouton category
