@@ -98,7 +98,11 @@ const adminController = {
       const coffee = await dataMapper.getOneCoffeeById(id);
       const categoryName = await dataMapper.getCategoryNameById(id);
 
-      res.render("editCoffee", { page: "admin", coffee, categoryName });
+      // Récupération et suppression du message après affichage
+      const popUpMessage = req.session.popUpMessage;
+      delete req.session.popUpMessage;
+
+      res.render("editCoffee", { page: "admin", coffee, categoryName, popUpMessage });
     } catch (error) {
       console.error(error);
       res.status(500).send("Erreur interne lors du rendu de la page admin");
@@ -129,8 +133,7 @@ const adminController = {
       req.session.popUpMessage = {
         notificationTitle: "Café édité avec succès",
         details: `Le café ${editCoffeeData.name} a été modifié`,
-      };
-      console.log(req.session.popUpMessage);
+      };      
 
       // Si l'utilisateur est admin, on peut editer le café à la base de données
       await dataMapper.editCoffeeToDatabase(editCoffeeData, coffeeId);

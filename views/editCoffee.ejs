@@ -1,7 +1,11 @@
 <%- include('./partials/header') %>
 
     <main>
-        <%- include('./partials/popUp') %>
+        
+        <% if (typeof popUpMessage !== 'undefined' && popUpMessage) { %>
+            <%- include('./partials/popUp') %>
+          <% } %>
+          
             <section id="admin">
                 <div class="admin-title-container">
                     <a href="/login/admin" class="btn-back">Retour</a>
@@ -116,3 +120,4 @@
 
     <%- include('./partials/footer') %>
         <script type="module" src="/js/toggleSideBar.js" defer></script>
+        <script type="module" src="/js/notification.js" defer></script>
