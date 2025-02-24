@@ -13,6 +13,7 @@ TODOLIST
 - [X] Rajouter les popups de succes 
 - [ ] Rajouter les popups d'echec
 - [ ] Sur la page Catalague, revoir le responsive pour la banniere
+- [ ] Ajouter un capchat
 -- [X] Rajouter le formulaire de contact
 
 - [x] Décaler le bouton category

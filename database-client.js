@@ -12,7 +12,7 @@ const client = new pg.Client({
   connectionString: process.env.PG_URL,
   // Définir explicitement l'encodage
   client_encoding: "UTF8",
-  ssl: false, // Désactiver SSL ici
+  ssl: false, 
 });
 
 // Ouvrir la connexion

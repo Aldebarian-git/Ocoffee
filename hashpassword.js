@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import client from "./database-client.js"; // Assure-toi d'importer ton client PostgreSQL
+import client from "./database-client.js"; 
 
 
 async function hashPassword(plainPassword) {

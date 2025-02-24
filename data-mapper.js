@@ -14,6 +14,7 @@ const dataMapper = {
 
     return coffees;
   },
+  
   async getCategoryNameById(id) {
     const result = await client.query(
       `
@@ -32,6 +33,7 @@ const dataMapper = {
       return null; // Si aucun résultat n'est trouvé
     }
   },
+
   async getCoffeesByNameOrRef(searchterm) {
     const result = await client.query(
       `
@@ -146,6 +148,7 @@ const dataMapper = {
       console.error("Erreur lors de la suppression du café:", error);
     }
   },
+
   async isAdmin({ username, password }) {
     const query = 'SELECT * FROM "admins" WHERE "username" = $1';
     const values = [username];
